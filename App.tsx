@@ -4,7 +4,7 @@ import { Navigation } from './components/Navigation';
 import { AppView, ChatMessage } from './types';
 import { MIRACLES_DATA, PRAYERS_DATA, ADORATION_SCRIPTURES, HOLY_HOUR_DISPLAY_TEXT, HOLY_HOUR_SPEECH_TEXT } from './constants';
 import { sendMessage, generateSpeech, convertPCMToAudioBuffer } from './services/geminiService';
-import { Play, Pause, RefreshCw, Send, Sparkles, ChevronRight, ChevronLeft, Clock, MapPin, Flame, MessageCircle, Heart, BookOpen, Volume2, X, Gauge } from 'lucide-react';
+import { Play, Pause, RefreshCw, Send, Sparkles, ChevronRight, ChevronLeft, Clock, MapPin, Flame, MessageCircle, Heart, BookOpen, Volume2, X, Gauge, Video } from 'lucide-react';
 
 // Custom Logo Component: Eucharistic Monstrance with Ruby Heart
 const EucharisticLogo = ({ className = "" }: { className?: string }) => (
@@ -285,91 +285,124 @@ const App: React.FC = () => {
   // --- VIEW RENDER FUNCTIONS ---
 
   const renderHomeView = () => (
-    <div className="flex flex-col h-full bg-gradient-to-b from-sacred-beige to-white">
-      {/* Hero */}
-      <div className="bg-divine-red text-sacred-beige p-8 rounded-b-[40px] shadow-xl relative overflow-hidden min-h-[180px]">
-        {/* Custom Logo Placed on Right */}
-        <div className="absolute -right-6 -top-4 opacity-90 transform rotate-6">
-            <EucharisticLogo className="w-48 h-48 drop-shadow-2xl" />
+    <div className="flex flex-col h-full bg-stone-50 p-6 space-y-6">
+      {/* Header */}
+      <div className="flex justify-between items-center pt-4">
+        <div>
+          <h1 className="text-3xl font-serif font-bold text-divine-red">Eucharistic Heart</h1>
+          <p className="text-stone-500 text-sm">Adore. Unite. Radiate.</p>
+        </div>
+        <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-stone-200 shadow-sm bg-sacred-beige flex items-center justify-center">
+            {/* Avatar Placeholder */}
+            <EucharisticLogo className="w-10 h-10" />
+        </div>
+      </div>
+
+      {/* Holy Hour Card */}
+      <button 
+        onClick={() => setCurrentView(AppView.ADORATION)}
+        className="relative w-full bg-gradient-to-br from-orange-400 to-orange-600 rounded-[35px] p-8 text-left shadow-lg overflow-hidden group active:scale-95 transition-all"
+      >
+        {/* Background Decorative Elements */}
+        <div className="absolute -right-8 -bottom-8 opacity-20">
+          <Clock size={160} className="text-white" />
         </div>
         
-        <div className="relative z-10 mt-6 max-w-[65%]">
-            <h1 className="text-4xl font-serif font-bold mb-2 leading-tight">Eucharistic Heart</h1>
-            <h2 className="text-xl font-light text-radiant-gold italic mb-6">Companion</h2>
-            <div className="flex items-center space-x-2 bg-black/20 w-fit px-4 py-2 rounded-full backdrop-blur-sm border border-white/10">
-                <Sparkles size={16} className="text-radiant-gold" />
-                <span className="text-sm font-semibold tracking-wide uppercase">Adore. Unite. Radiate.</span>
-            </div>
+        <div className="relative z-10">
+          <h2 className="text-white font-serif font-bold text-3xl mb-2">Start Holy Hour</h2>
+          <p className="text-white/90 text-sm font-medium mb-6 flex items-center">
+             30 min guided adoration <Flame size={14} className="ml-1 text-yellow-300" />
+          </p>
+          <div className="bg-white/20 backdrop-blur-sm w-fit px-5 py-2 rounded-full text-white text-sm font-bold flex items-center group-hover:bg-white group-hover:text-orange-500 transition-colors">
+             Let's go <ChevronRight size={16} className="ml-1" />
+          </div>
         </div>
-      </div>
+      </button>
 
-      <div className="p-6 space-y-6">
+      {/* Grid Menu */}
+      <div className="space-y-4">
+        {/* Find Chapel */}
+        <button 
+          onClick={() => handleQuickAction("Find adoration near me")}
+          className="w-full bg-white p-5 rounded-[25px] shadow-sm border border-stone-100 flex items-center justify-between group active:scale-95 transition-all"
+        >
+           <div className="flex items-center space-x-4">
+              <div className="bg-red-50 w-12 h-12 rounded-full flex items-center justify-center text-divine-red group-hover:bg-divine-red group-hover:text-white transition-colors">
+                 <MapPin size={24} fill="currentColor" className="opacity-80" />
+              </div>
+              <div className="text-left">
+                 <h3 className="font-bold text-stone-800 text-lg">Find a Chapel</h3>
+                 <p className="text-stone-400 text-xs">Jesus is waiting nearby 📍</p>
+              </div>
+           </div>
+           <div className="bg-stone-50 rounded-full p-2 text-stone-300 group-hover:text-divine-red transition-colors">
+              <ChevronRight size={20} />
+           </div>
+        </button>
+
+        {/* Virtual Adoration */}
+        <button 
+          onClick={() => window.open('https://www.youtube.com/@ShalomWorldPrayer', '_blank')}
+          className="w-full bg-white p-5 rounded-[25px] shadow-sm border border-stone-100 flex items-center justify-between group active:scale-95 transition-all"
+        >
+           <div className="flex items-center space-x-4">
+              <div className="bg-amber-50 w-12 h-12 rounded-full flex items-center justify-center text-amber-500 group-hover:bg-amber-500 group-hover:text-white transition-colors">
+                 <Video size={24} fill="currentColor" className="opacity-80" />
+              </div>
+              <div className="text-left">
+                 <h3 className="font-bold text-stone-800 text-lg">Virtual Adoration</h3>
+                 <p className="text-stone-400 text-xs">Join live prayer & adoration.</p>
+              </div>
+           </div>
+           <div className="bg-stone-50 rounded-full p-2 text-stone-300 group-hover:text-divine-red transition-colors">
+              <ChevronRight size={20} />
+           </div>
+        </button>
+
         <div className="grid grid-cols-2 gap-4">
-            <button 
-                onClick={() => setCurrentView(AppView.ADORATION)}
-                className="col-span-2 bg-gradient-to-r from-radiant-gold to-orange-400 p-5 rounded-2xl shadow-lg hover:shadow-xl transition-all active:scale-95 group text-left relative overflow-hidden"
-            >
-                <div className="absolute right-0 bottom-0 opacity-20 transform translate-x-4 translate-y-4">
-                    <Clock size={80} className="text-white" />
-                </div>
-                <h3 className="text-white font-bold text-2xl mb-1">Start Holy Hour</h3>
-                <p className="text-white/90 text-sm">30 min guided adoration 🔥</p>
-                <div className="mt-4 inline-flex items-center bg-white/20 px-3 py-1 rounded-full text-white text-xs font-bold">
-                    Let's go <ChevronRight size={14} className="ml-1" />
-                </div>
-            </button>
+           {/* Chat */}
+           <button 
+             onClick={() => setCurrentView(AppView.CHAT)}
+             className="bg-white p-6 rounded-[25px] shadow-sm border border-stone-100 flex flex-col items-center justify-center text-center space-y-3 active:scale-95 transition-all group"
+           >
+              <div className="bg-orange-50 w-14 h-14 rounded-full flex items-center justify-center text-orange-500 group-hover:scale-110 transition-transform">
+                 <MessageCircle size={28} fill="currentColor" className="opacity-80" />
+              </div>
+              <div>
+                 <h3 className="font-bold text-stone-800">Chat</h3>
+                 <p className="text-stone-400 text-xs">Ask the Companion</p>
+              </div>
+           </button>
 
-            {/* Adoration Finder Button */}
-            <button 
-                onClick={() => handleQuickAction("Find adoration near me")}
-                className="col-span-2 bg-white p-4 rounded-2xl shadow-md border border-stone-100 active:scale-95 transition-all flex items-center space-x-4 group"
-            >
-                <div className="bg-divine-red/10 w-12 h-12 rounded-full flex items-center justify-center text-divine-red group-hover:bg-divine-red group-hover:text-white transition-colors">
-                    <MapPin size={24} />
-                </div>
-                <div className="text-left flex-1">
-                    <h3 className="text-stone-800 font-bold text-lg">Find a Chapel</h3>
-                    <p className="text-stone-500 text-xs">Jesus is waiting nearby 📍</p>
-                </div>
-                <div className="bg-stone-100 rounded-full p-1">
-                    <ChevronRight size={16} className="text-stone-400" />
-                </div>
-            </button>
-
-            <button 
-                onClick={() => setCurrentView(AppView.CHAT)}
-                className="bg-white p-5 rounded-2xl shadow-md border border-stone-100 active:scale-95 transition-all"
-            >
-                <div className="bg-divine-red/10 w-10 h-10 rounded-full flex items-center justify-center mb-3 text-divine-red">
-                    <MessageCircle size={20} />
-                </div>
-                <h3 className="text-stone-800 font-bold text-lg">Chat</h3>
-                <p className="text-stone-500 text-xs mt-1">Ask the Companion</p>
-            </button>
-
-            <button 
-                onClick={() => setCurrentView(AppView.MIRACLES)}
-                className="bg-white p-5 rounded-2xl shadow-md border border-stone-100 active:scale-95 transition-all"
-            >
-                <div className="bg-divine-red/10 w-10 h-10 rounded-full flex items-center justify-center mb-3 text-divine-red">
-                    <Heart size={20} />
-                </div>
-                <h3 className="text-stone-800 font-bold text-lg">Miracles</h3>
-                <p className="text-stone-500 text-xs mt-1">Mind-blowing facts</p>
-            </button>
-        </div>
-
-        {/* Daily Inspiration */}
-        <div className="bg-stone-50 border border-stone-200 p-5 rounded-2xl">
-            <h4 className="text-divine-red font-bold text-sm uppercase tracking-wider mb-2 flex items-center">
-                <Flame size={14} className="mr-2" /> Daily Fire
-            </h4>
-            <p className="text-stone-700 italic font-serif leading-relaxed">
-                "The Eucharist is my highway to heaven."
-            </p>
-            <p className="text-right text-stone-500 text-xs mt-2 font-bold">— Bl. Carlo Acutis</p>
+           {/* Miracles */}
+           <button 
+             onClick={() => setCurrentView(AppView.MIRACLES)}
+             className="bg-white p-6 rounded-[25px] shadow-sm border border-stone-100 flex flex-col items-center justify-center text-center space-y-3 active:scale-95 transition-all group"
+           >
+              <div className="bg-pink-50 w-14 h-14 rounded-full flex items-center justify-center text-pink-500 group-hover:scale-110 transition-transform">
+                 <Heart size={28} fill="currentColor" className="opacity-80" />
+              </div>
+              <div>
+                 <h3 className="font-bold text-stone-800">Miracles</h3>
+                 <p className="text-stone-400 text-xs">Mind-blowing facts</p>
+              </div>
+           </button>
         </div>
       </div>
+
+      {/* Daily Fire Quote */}
+      <div className="bg-white p-6 rounded-[25px] shadow-sm border border-stone-100 mt-auto">
+         <h4 className="text-divine-red text-xs font-bold uppercase tracking-wider mb-3 flex items-center">
+            <Flame size={12} className="mr-2" /> Daily Fire
+         </h4>
+         <p className="text-stone-800 font-serif text-lg italic leading-relaxed">
+            "The Eucharist is my highway to heaven."
+         </p>
+         <p className="text-right text-stone-400 text-xs mt-3 font-bold">— Bl. Carlo Acutis</p>
+      </div>
+      
+      {/* Spacer for Bottom Nav */}
+      <div className="h-16"></div>
     </div>
   );
 
@@ -580,54 +613,52 @@ const App: React.FC = () => {
 
         return (
              <div className="flex flex-col h-full bg-sacred-beige">
-                <div className="bg-white px-4 py-4 border-b border-stone-100 sticky top-0 z-10 flex items-center">
-                    <button 
+                {/* Full Width Header Image */}
+                <div className="relative w-full h-64 shrink-0">
+                   <div className="absolute top-4 left-4 z-20">
+                     <button 
                         onClick={() => setSelectedMiracle(null)}
-                        className="p-2 -ml-2 text-stone-500 hover:text-divine-red transition-colors"
-                    >
+                        className="bg-white/80 backdrop-blur-md p-2 rounded-full text-stone-800 hover:bg-white hover:text-divine-red transition-all shadow-md"
+                     >
                         <ChevronLeft size={24} />
-                    </button>
-                    <h2 className="ml-2 font-bold text-stone-800 text-lg truncate flex-1">{miracle.location}</h2>
+                     </button>
+                   </div>
+                   <img 
+                      src={miracle.headerImageUrl} 
+                      alt={miracle.title}
+                      className="w-full h-full object-cover"
+                   />
+                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                 </div>
-                
-                <div className="overflow-y-auto pb-24">
-                     {/* Image Placeholder header - styled for miracle */}
-                    <div className="h-48 bg-divine-red/10 w-full relative overflow-hidden flex items-center justify-center">
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-                        <Heart className="text-divine-red opacity-20 w-32 h-32 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-                        <div className="absolute bottom-4 left-6 z-20">
-                             <div className="flex items-center space-x-2 text-radiant-gold text-xs font-bold uppercase tracking-widest mb-1">
-                                <MapPin size={12} />
-                                <span>{miracle.location.toUpperCase()}</span>
-                             </div>
-                             <h1 className="text-2xl font-serif font-bold text-white leading-tight drop-shadow-md">
-                                The Miracle of {miracle.title.split(',')[0]}
-                             </h1>
-                        </div>
-                    </div>
 
-                    <div className="p-6">
-                        <div className="flex items-center justify-between mb-6">
-                            <span className="bg-stone-100 text-stone-600 px-3 py-1 rounded-full text-xs font-bold">
-                                {miracle.date}
-                            </span>
+                <div className="overflow-y-auto pb-24 -mt-6 rounded-t-3xl bg-sacred-beige relative z-10 px-6 pt-8">
+                     <div className="mb-6">
+                        <div className="flex items-center space-x-2 text-divine-red text-xs font-bold uppercase tracking-widest mb-2">
+                           <MapPin size={12} />
+                           <span>{miracle.location}</span>
                         </div>
+                        <h1 className="text-3xl font-serif font-bold text-stone-900 leading-tight mb-3">
+                           The Miracle of {miracle.title.split(',')[0]}
+                        </h1>
+                        <span className="bg-radiant-lightGold text-amber-800 px-3 py-1 rounded-full text-xs font-bold inline-block">
+                             {miracle.date}
+                        </span>
+                     </div>
 
-                        <div className="prose prose-stone">
-                             <p className="font-serif text-lg leading-relaxed text-stone-800 mb-6 first-letter:text-5xl first-letter:font-bold first-letter:text-divine-red first-letter:mr-1 first-letter:float-left">
+                     <div className="prose prose-stone">
+                             <p className="font-serif text-lg leading-relaxed text-stone-800 mb-8 first-letter:text-5xl first-letter:font-bold first-letter:text-divine-red first-letter:mr-1 first-letter:float-left">
                                 {miracle.fullStory || miracle.description}
                              </p>
                              
-                             <div className="bg-divine-red/5 border border-divine-red/10 rounded-xl p-5 my-8">
-                                <h4 className="text-divine-red font-bold text-sm uppercase mb-2 flex items-center">
-                                    <Sparkles size={14} className="mr-2" /> Scientific Fact
+                             <div className="bg-divine-red/5 border border-divine-red/10 rounded-2xl p-6 mb-8">
+                                <h4 className="text-divine-red font-bold text-sm uppercase mb-3 flex items-center">
+                                    <Sparkles size={16} className="mr-2" /> Scientific Fact
                                 </h4>
-                                <p className="text-divine-red/80 italic font-serif">
+                                <p className="text-stone-700 italic font-serif leading-relaxed">
                                     "{miracle.science}"
                                 </p>
                              </div>
                         </div>
-                    </div>
                 </div>
             </div>
         );
@@ -656,21 +687,31 @@ const App: React.FC = () => {
             <button 
                 key={miracle.id}
                 onClick={() => setSelectedMiracle(miracle.id)}
-                className="w-full bg-white rounded-2xl border border-stone-100 shadow-sm hover:shadow-lg transition-all active:scale-[0.99] overflow-hidden group text-left"
+                className="w-full bg-white rounded-2xl border border-stone-100 shadow-sm hover:shadow-lg transition-all active:scale-[0.99] overflow-hidden group text-left flex"
             >
-              <div className="p-5">
-                <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-bold text-lg text-stone-800 group-hover:text-divine-red transition-colors">
+              {/* Left Image Thumbnail */}
+              <div className="w-24 h-full shrink-0 relative bg-stone-200">
+                  <img 
+                    src={miracle.thumbnailUrl} 
+                    alt={miracle.title}
+                    className="w-full h-full object-cover absolute inset-0"
+                  />
+              </div>
+
+              {/* Right Content */}
+              <div className="p-4 flex-1 flex flex-col">
+                <div className="mb-1">
+                    <h3 className="font-bold text-lg text-stone-800 leading-tight group-hover:text-divine-red transition-colors mb-1">
                         {miracle.title}
                     </h3>
-                    <span className="bg-radiant-lightGold text-amber-700 text-[10px] font-bold px-2 py-1 rounded-full uppercase">
+                    <span className="bg-stone-100 text-stone-500 text-[10px] font-bold px-2 py-0.5 rounded text-xs inline-block">
                         {miracle.date}
                     </span>
                 </div>
-                <p className="text-stone-500 text-sm leading-relaxed mb-4">
+                <p className="text-stone-500 text-sm leading-snug mb-3 line-clamp-2">
                     {miracle.description}
                 </p>
-                <div className="flex items-center text-divine-red text-xs font-bold font-sans">
+                <div className="flex items-center text-divine-red text-xs font-bold font-sans mt-auto">
                     Read story <ChevronRight size={14} className="ml-1" />
                 </div>
               </div>

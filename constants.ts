@@ -1,48 +1,35 @@
 import { Miracle, Prayer } from './types';
 
 export const SYSTEM_INSTRUCTION = `
-You are "Eucharistic Heart Companion 🔥❤️" – the vibrant, joyful, Spirit-filled friend every young (and young-at-heart) Catholic wants in their pocket.
+You are the "Eucharistic Heart Companion".
 
-You speak like Bl. Carlo Acutis mixed with a fire-lit worship night: warm, bold, full of awe, never stuffy or old-fashioned. Use words like “bro”, “let’s gooo”, “fire”, “lit”, “real talk”, “He’s literally HERE”, emojis sparingly but powerfully (❤️‍🔥🙌🔥), and always radiate contagious love for Jesus in the Eucharist.
+CORE MISSION:
+For any general user input, your SOLE purpose is to provide a relevant "Word of God" from the Catholic Bible (RSV-CE or NABRE version).
 
-Your one mission: help people fall crazy in love with the Eucharistic Heart of Jesus and live the tagline every day → Adore. Unite. Radiate.
+RULES:
+1. **NO Chatty Filler**: Do not use words like "Hey bro", "Wow", "Listen", or "Here is a verse". Just give the Scripture.
+2. **Relevant Verse**: Select a verse that directly speaks to the user's keyword, emotion, or question.
+3. **Format**:
+   "[Scripture Text]"
+   — [Book Chapter:Verse]
 
-BRANDING RULES:
-- Always sign off or refer to yourself as “Your Eucharistic Heart Companion ❤️‍🔥”
-- Tagline (use it often): Adore. Unite. Radiate.
-- Colors in spirit: Sacred Beige, Divine Red, Radiant Gold.
+   [Sign-off]
 
-CORE FEATURES & RESPONSES:
-
-1. ADORATION FINDER (Highest Priority Logic):
-   IF user says: "Adoration near me", "Find a chapel", "Perpetual adoration nearby", "Where can I adore Jesus right now?", "I need Jesus now" (or similar):
-   REPLY IMMEDIATELY:
-   "YESSS LET’S GOOOO ❤️‍🔥 Jesus is literally waiting for you RIGHT NOW in the Blessed Sacrament!
-   Drop your city (and state/country if not US) or zip code real quick and I’ll send you the direct Google Maps link.
-   (example: “I’m in Manila, Philippines” or “Chicago” or “90210”)"
-
-   IF user provides a location (City, Zip, etc.) after asking for adoration:
-   REPLY EXACTLY LIKE THIS:
-   "Here is your direct Google Maps search for perpetual adoration chapels near you.
-
-   👇 Click here to open map:
-   https://www.google.com/maps/search/perpetual+adoration+chapel+near+[INSERT_LOCATION_HERE_WITH_+_FOR_SPACES]
-
-   Jesus is waiting for you. Don’t wait. Run to Him. I’m praying for your Holy Hour.
-
-   Who are you bringing with you next time?
-
+4. **Sign-off**: You must end EVERY single message exactly like this:
    Adore. Unite. Radiate.
-   Your Eucharistic Heart Companion ❤️‍🔥"
+   Your Eucharistic Heart Companion ❤️‍🔥
 
-2. GENERAL CHAT:
-   - "Start Holy Hour": Guide them briefly into presence (or use the full script if requested).
-   - "Miracle": Tell one verified miracle with date/science.
-   - End every response with a question or invitation (e.g., "Ready to pray right now?", "Who are you radiating His love to today?").
+EXCEPTION - ADORATION FINDER:
+If the user explicitly asks to "Find a chapel", "Adoration near me", or "Where is Jesus?", ONLY THEN use this specific functional template:
+"Here is your direct Google Maps search for perpetual adoration chapels near you.
 
-3. TONE:
-   - Never boring, never robotic.
-   - You are the friend who drags people into the chapel at 2 a.m. because "Jesus is waiting and it's about to be LIT."
+👇 Click here to open map:
+https://www.google.com/maps/search/perpetual+adoration+chapel+near+me
+
+Adore. Unite. Radiate.
+Your Eucharistic Heart Companion ❤️‍🔥"
+
+DO NOT use the "bl. carlo" persona. DO NOT use slang. ONLY THE WORD OF GOD.
 `;
 
 export const HOLY_HOUR_DISPLAY_TEXT = `Right now we’re entering the most powerful 30-minute Eucharistic Heart Holy Hour on earth
@@ -313,6 +300,10 @@ Adore. Unite. Radiate.
 
 Amen.`;
 
+// Placeholder images for visual redesign
+const THUMBNAIL_URL = "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=200";
+const HEADER_URL = "https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&q=80&w=800";
+
 export const MIRACLES_DATA: Miracle[] = [
   {
     id: '1',
@@ -321,6 +312,8 @@ export const MIRACLES_DATA: Miracle[] = [
     date: 'c. 750 A.D.',
     description: 'The host turned into living Flesh and the wine into real Blood.',
     science: '1971 analysis confirmed it is human myocardial (heart) tissue, type AB blood (same as Shroud of Turin), with no preservatives.',
+    thumbnailUrl: THUMBNAIL_URL,
+    headerImageUrl: HEADER_URL,
     fullStory: `In the Church of St. Legontian, a doubting Basilian monk witnessed the Host become flesh and the wine coagulate into five blood globules during Mass. Preserved for over 1,250 years, 1970–1971 and 1981 analyses by Professor Odoardo Linoli confirmed the flesh as human myocardial (heart) tissue with arterioles, veins, and nerves, and the blood as type AB—both from a living person, without preservatives. The globules' weight equals any single one or all combined, defying physics. Approved by the Church in the 17th century and reaffirmed, this earliest documented miracle in Europe set a precedent for scientific scrutiny, inspiring faith amid early medieval doubts on the Real Presence.`
   },
   {
@@ -330,6 +323,8 @@ export const MIRACLES_DATA: Miracle[] = [
     date: 'Feb 16, 1247',
     description: 'A stolen Host bled in a veil and emitted light.',
     science: 'Blood tests confirm human blood. The Host has remained incorrupt for over 775 years.',
+    thumbnailUrl: THUMBNAIL_URL,
+    headerImageUrl: HEADER_URL,
     fullStory: `A woman stole a Host for a sorceress to mend her marriage; it bled in her veil, emitting light from a hidden trunk. The priest enshrined it in the Church of St. Stephen (now Holy Miracle Church), where the blood liquefied into a crystal ampoule. Over 775 years incorrupt, 1340, 1612, and modern tests confirm human blood without decay. Approved by the Diocese of Lisbon, this Iberian miracle, amid 13th-century Albigensian heresy, emphasizes sacrilege's gravity and Christ's merciful revelation.`
   },
   {
@@ -339,6 +334,8 @@ export const MIRACLES_DATA: Miracle[] = [
     date: 'Summer 1263',
     description: 'Blood dripped from the Host onto the corporal during consecration.',
     science: 'No natural blood source found on the corporal.',
+    thumbnailUrl: THUMBNAIL_URL,
+    headerImageUrl: HEADER_URL,
     fullStory: `At St. Christina Church, a doubting priest saw blood drip from the Host onto the corporal during consecration. Presented to Pope Urban IV in Orvieto, it inspired the 1264 bull instituting Corpus Christi. The stained corporal, preserved in Orvieto's cathedral, shows no natural blood source per historical analyses. Approved immediately by the Pope, this central Italian miracle influenced global Eucharistic devotion.`
   },
   {
@@ -348,6 +345,8 @@ export const MIRACLES_DATA: Miracle[] = [
     date: 'Mar 31, 1331',
     description: 'A Host fell onto the altar cloth and transformed into a bloodstain.',
     science: 'No scientific decay noted over centuries.',
+    thumbnailUrl: THUMBNAIL_URL,
+    headerImageUrl: HEADER_URL,
     fullStory: `In the Church of St. Martin, a Host fell from a communicant's mouth onto the altar cloth, vanishing and leaving a bloodstain matching its size. The relic cloth, venerated in Blanot, was investigated and approved by the Bishop of Autun in 1331. No scientific decay noted over centuries. This French miracle reinforces worthy reception, highlighting Europe's rich Eucharistic heritage.`
   },
   {
@@ -357,6 +356,8 @@ export const MIRACLES_DATA: Miracle[] = [
     date: 'Mar 15, 1345',
     description: 'A Host survived fire unscathed after being regurgitated.',
     science: 'Inexplicable survival from fire.',
+    thumbnailUrl: THUMBNAIL_URL,
+    headerImageUrl: HEADER_URL,
     fullStory: `A regurgitated Viaticum Host survived fire unscathed, miraculously returning home thrice. Enshrined in the Holy Place Chapel until Reformation destruction, fragments survived. Approved by the Archbishop of Utrecht, this Northern European miracle amid Black Death era doubts affirms the Eucharist's resilience, influencing Dutch Catholic piety.`
   },
   {
@@ -366,6 +367,8 @@ export const MIRACLES_DATA: Miracle[] = [
     date: 'Aug 17, 1730',
     description: 'Stolen Hosts recovered in dust remain incorrupt after centuries.',
     science: 'Tests confirm wheat composition but no decay, reversing natural laws.',
+    thumbnailUrl: THUMBNAIL_URL,
+    headerImageUrl: HEADER_URL,
     fullStory: `Thieves stole 351 Hosts from the Basilica of St. Francis; recovered days later in dust, they remain incorrupt after 294 years. Tests (1789–2014) confirm wheat composition but no decay, reversing natural laws. Approved by Popes and the Diocese of Siena, this miracle during Enlightenment skepticism bolsters faith in Italy's Eucharistic tradition.`
   },
   {
@@ -375,6 +378,8 @@ export const MIRACLES_DATA: Miracle[] = [
     date: 'Aug 18, 1996',
     description: 'A desecrated Host transformed into bloody cardiac tissue.',
     science: 'Dr. Frederick Zugibe found living heart muscle under stress with active white blood cells. Blood type AB.',
+    thumbnailUrl: THUMBNAIL_URL,
+    headerImageUrl: HEADER_URL,
     fullStory: `In Santa Maria Parish, a desecrated Host transformed into bloody cardiac tissue. Analyzed by Dr. Frederick Zugibe (blind study), it showed living heart muscle under stress, with active white blood cells—impossible for aged samples. Blood type AB. Approved locally by Cardinal Bergoglio (Pope Francis), this South American miracle emphasizes Christ's suffering heart.`
   },
   {
@@ -384,6 +389,8 @@ export const MIRACLES_DATA: Miracle[] = [
     date: 'Apr 28, 2001',
     description: 'Christ’s face appeared on a Host in a monstrance.',
     science: 'Photographed and verified locally.',
+    thumbnailUrl: THUMBNAIL_URL,
+    headerImageUrl: HEADER_URL,
     fullStory: `At St. Mary's Church, a Host in a monstrance displayed Christ's face after adoration. Investigated by the Archdiocese of Trivandrum, it faded but was photographed and approved locally in 2001. This Asian miracle, amid growing secularism, marks India's early 21st-century Eucharistic revival, inspiring interfaith dialogue.`
   },
   {
@@ -393,6 +400,8 @@ export const MIRACLES_DATA: Miracle[] = [
     date: 'Oct 21, 2006',
     description: 'A Host secreted red fluid during a retreat.',
     science: 'Confirmed human AB blood and living myocardial tissue with trauma signs.',
+    thumbnailUrl: THUMBNAIL_URL,
+    headerImageUrl: HEADER_URL,
     fullStory: `At St. Martin de Tours Church, a Host secreted red fluid during a retreat. 2013–2017 analyses confirmed human AB blood and living myocardial tissue with trauma signs, exuding fresh blood years later. Approved by the Diocese of Chilpancingo-Chilapa, this Latin American miracle addresses modern atheism, calling for reparation.`
   },
   {
@@ -402,6 +411,8 @@ export const MIRACLES_DATA: Miracle[] = [
     date: 'Oct 12, 2008',
     description: 'A dropped Host turned into myocardial tissue interwoven with bread.',
     science: 'Professors confirmed bread and heart tissue tightly interwoven naturally.',
+    thumbnailUrl: THUMBNAIL_URL,
+    headerImageUrl: HEADER_URL,
     fullStory: `At St. Anthony Church, a dropped Host in water formed a red myocardial stain interwoven with bread. Professors Sobaniec-Łotowska and Sulkowski's 2009 study confirmed inexplicable integration. Blood type AB. Approved by Archbishop Edward Ozorowski, this Eastern European miracle fosters national Eucharistic congresses.`
   },
   {
@@ -411,6 +422,8 @@ export const MIRACLES_DATA: Miracle[] = [
     date: 'Nov 15, 2013',
     description: 'Christ’s face appeared on a Host during Mass.',
     science: 'First Vatican-recognized Eucharistic miracle in India.',
+    thumbnailUrl: THUMBNAIL_URL,
+    headerImageUrl: HEADER_URL,
     fullStory: `At Christ the King Church (Syro-Malabar), Fr. Thomas Pathickal saw Christ's face appear on a Host during Mass. After 12 years of investigation by local and Vatican experts, the Holy See approved it on May 31, 2025—the first Vatican-recognized Eucharistic miracle in India. The image draws pilgrims, affirming Asia's growing faith.`
   },
   {
@@ -420,6 +433,8 @@ export const MIRACLES_DATA: Miracle[] = [
     date: 'Dec 25, 2013',
     description: 'A fallen Christmas Host formed red myocardial fragments.',
     science: 'Forensic analysis confirmed heart tissue showing signs of agony.',
+    thumbnailUrl: THUMBNAIL_URL,
+    headerImageUrl: HEADER_URL,
     fullStory: `At St. Hyacinth Shrine, a fallen Christmas Host formed red myocardial fragments in water, showing agony signs per forensic analysis. Blood type AB, no preservatives. Approved by Bishop Zbigniew Kiernikowski in 2016 and Vatican-noted, this miracle on Christ's Nativity feast proclaims His incarnate heart.`
   }
 ];

@@ -6,6 +6,8 @@ export interface Miracle {
   description: string;
   science: string;
   fullStory?: string;
+  thumbnailUrl?: string;
+  headerImageUrl?: string;
 }
 
 export interface Prayer {

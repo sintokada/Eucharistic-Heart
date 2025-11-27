@@ -1,7 +1,7 @@
-import { GoogleGenAI, ChatSession, Modality } from "@google/genai";
+import { GoogleGenAI, Chat, Modality } from "@google/genai";
 import { SYSTEM_INSTRUCTION } from "../constants";
 
-let chatSession: ChatSession | null = null;
+let chatSession: Chat | null = null;
 let genAI: GoogleGenAI | null = null;
 
 export const initializeChat = async () => {
@@ -18,7 +18,7 @@ export const initializeChat = async () => {
       model: "gemini-2.5-flash",
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
-        temperature: 1.0, // High temperature for enthusiastic, vibrant persona
+        temperature: 0.5, // Lower temperature for accurate scripture and less hallucination
       },
     });
     
